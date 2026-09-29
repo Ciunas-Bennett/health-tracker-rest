@@ -21,12 +21,7 @@ paths:
   /api/users/{user-id}:
     get:
       parameters:
-        - in: path
-          name: user-id
-          required: true
-          schema:
-            type: integer
-            example: 3232
+        - $ref: '#/components/parameters/UserIdPath'
       responses:
         200:
           description: This is a specifc user in the app
@@ -45,6 +40,15 @@ paths:
         200:
           description: The user has been created
 components:
+  parameters:
+    UserIdPath:
+      in: path
+      name: user-id
+      description: User id path parameter
+      required: true
+      schema:
+        type: integer
+        example: 3232
   schemas:
     User:
       type: object
