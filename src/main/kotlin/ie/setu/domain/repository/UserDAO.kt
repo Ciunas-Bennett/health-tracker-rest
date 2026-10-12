@@ -30,4 +30,11 @@ class UserDAO {
     fun delete(id: Int) {
         users.removeIf { it.id == id }
     }
+
+    fun update(id: Int, user: User) {
+        val index = users.indexOfFirst { it.id == id }
+        if (index != -1) {
+            users[index] = user.copy(id = id)
+        }
+    }
 }
