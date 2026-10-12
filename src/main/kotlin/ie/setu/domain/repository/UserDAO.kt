@@ -26,4 +26,8 @@ class UserDAO {
     fun save(user: User){
         users.add(user)
     }
+
+    fun delete(id: Int) {
+        users.removeIf { it.id == id }
+    }
 }

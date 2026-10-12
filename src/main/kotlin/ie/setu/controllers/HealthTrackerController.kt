@@ -34,4 +34,9 @@ object HealthTrackerController {
         userDao.save(user)
         ctx.json(user)
     }
+
+    fun deleteUser(ctx: Context) {
+        userDao.delete(ctx.pathParam("user-id").toInt())
+        ctx.status(204)
+    }
 }
