@@ -19,6 +19,10 @@ class UserDAO {
         return users.find {it.id == id}
     }
 
+    fun findByEmail(email: String): User? {
+        return users.find { it.email == email }
+    }
+
     fun save(user: User){
         users.add(user)
     }

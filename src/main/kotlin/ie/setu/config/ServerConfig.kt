@@ -29,6 +29,7 @@ class ServerConfig {
     private fun registerRoutes(config: JavalinConfig) {
         config.routes.get("/api/users", HealthTrackerController::getAllUsers)
         config.routes.get("/api/users/{user-id}", HealthTrackerController::getUserByUserId)
+        config.routes.get("/api/users/email/{email}", HealthTrackerController::getUserByEmail)
         config.routes.post("/api/users", HealthTrackerController::addUser)
     }
 }
