@@ -5,23 +5,24 @@ import io.javalin.Javalin
 import io.javalin.config.JavalinConfig
 
 class ServerConfig {
+    private fun getRemoteAssignedPort(): Int {
+        val remotePort = System.getenv("PORT")
+        return if (remotePort != null) {
+            Integer.parseInt(remotePort)
+        } else 8080
+    }
 
     fun startJavalinService(): Javalin {
 
         val app = Javalin.create { config ->
-
             config.routes.exception(Exception::class.java) { e, ctx ->
                 e.printStackTrace()
             }
-
             config.routes.error(404) { ctx ->
                 ctx.json("404 - Not Found")
             }
-
             registerRoutes(config)
-
-        }.start(7001)
-
+        }.start(getRemoteAssignedPort())
 
         return app
     }
