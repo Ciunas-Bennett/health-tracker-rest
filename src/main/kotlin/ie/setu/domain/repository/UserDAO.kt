@@ -8,6 +8,7 @@ import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 
 class UserDAO {
@@ -52,6 +53,12 @@ class UserDAO {
         }
     }
 
-    fun update(id: Int, user: User){
+    fun update(id: Int, user: User) {
+        transaction {
+            Users.update({ Users.id eq id }) {
+                it[name] = user.name
+                it[email] = user.email
+            }
+        }
     }
 }
