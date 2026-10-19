@@ -36,8 +36,10 @@ object HealthTrackerController {
     }
 
     fun deleteUser(ctx: Context) {
-        userDao.delete(ctx.pathParam("user-id").toInt())
-        ctx.status(204)
+        if (userDao.delete(ctx.pathParam("user-id").toInt()) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
 
     fun updateUser(ctx: Context) {

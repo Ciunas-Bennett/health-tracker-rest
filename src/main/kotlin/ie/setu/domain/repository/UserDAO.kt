@@ -3,6 +3,8 @@ package ie.setu.domain.repository
 import ie.setu.domain.User
 import ie.setu.domain.db.Users
 import ie.setu.utils.mapToUser
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -44,7 +46,10 @@ class UserDAO {
         }
     }
 
-    fun delete(id: Int) {
+    fun delete(id: Int): Int {
+        return transaction {
+            Users.deleteWhere { Users.id eq id }
+        }
     }
 
     fun update(id: Int, user: User){
