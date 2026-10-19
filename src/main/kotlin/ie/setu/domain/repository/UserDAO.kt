@@ -3,6 +3,7 @@ package ie.setu.domain.repository
 import ie.setu.domain.User
 import ie.setu.domain.db.Users
 import ie.setu.utils.mapToUser
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -26,7 +27,13 @@ class UserDAO {
         }
     }
 
-    fun save(user: User){
+    fun save(user: User) {
+        transaction {
+            Users.insert {
+                it[name] = user.name
+                it[email] = user.email
+            }
+        }
     }
 
     fun findByEmail(email: String): User? {
