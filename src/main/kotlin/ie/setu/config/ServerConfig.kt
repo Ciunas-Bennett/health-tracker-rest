@@ -38,8 +38,12 @@ class ServerConfig {
         config.routes.post("/api/users", HealthTrackerController::addUser)
         config.routes.delete("/api/users/{user-id}", HealthTrackerController::deleteUser)
         config.routes.patch("/api/users/{user-id}", HealthTrackerController::updateUser)
+        config.routes.get("/api/users/{user-id}/activities", HealthTrackerController::getActivitiesByUserId)
+        config.routes.delete("/api/users/{user-id}/activities", HealthTrackerController::deleteActivitiesByUserId)
         config.routes.get("/api/activities", HealthTrackerController::getAllActivities)
         config.routes.post("/api/activities", HealthTrackerController::addActivity)
-        config.routes.get("/api/users/{user-id}/activities", HealthTrackerController::getActivitiesByUserId)
+        config.routes.get("/api/activities/{activity-id}", HealthTrackerController::getActivitiesByActivityId)
+        config.routes.delete("/api/activities/{activity-id}", HealthTrackerController::deleteActivityByActivityId)
+        config.routes.patch("/api/activities/{activity-id}", HealthTrackerController::updateActivity)
     }
 }
