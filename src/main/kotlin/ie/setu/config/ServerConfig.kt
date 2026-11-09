@@ -25,7 +25,8 @@ class ServerConfig {
                 openapi.withDefinitionConfiguration { _, builder ->
                     builder.info { info ->
                         info.title("Health Tracker API")
-                        info.description("CRUD operations on the Health Tracker data.")
+                        info.version("1.0.0")
+                        info.description("This API provides endpoints for handling CRUD operations on the Health Tracker data.")
                     }
                 }
             })
