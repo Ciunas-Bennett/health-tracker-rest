@@ -6,11 +6,30 @@ import ie.setu.domain.User
 import ie.setu.domain.repository.UserDAO
 import ie.setu.utils.jsonToObject
 import io.javalin.http.Context
+import io.javalin.openapi.HttpMethod
+import io.javalin.openapi.OpenApi
+import io.javalin.openapi.OpenApiContent
+import io.javalin.openapi.OpenApiResponse
 
 object UserController {
 
     private val userDao = UserDAO()
 
+    @OpenApi(
+        path = "/api/users",
+        methods = [HttpMethod.GET],
+        summary = "Get all users",
+        operationId = "getAllUsers",
+        tags = ["Users"],
+        responses = [
+            OpenApiResponse(
+                status = "200",
+                content = [OpenApiContent(from = Array<User>::class)],
+                description = "A list of the users in the app"
+            ),
+            OpenApiResponse(status = "404", description = "There are no users in the app")
+        ]
+    )
     fun getAllUsers(ctx: Context) {
         val users = userDao.getAll()
         if (users.size != 0) {
