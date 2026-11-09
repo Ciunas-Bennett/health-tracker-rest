@@ -22,6 +22,7 @@
         <exposed-version>0.61.0</exposed-version>
         <postresql-version>42.7.7</postresql-version>
         <openshift-maven-plugin.version>1.18.1</openshift-maven-plugin.version>
+        <unirest-object-mappers-gson.version>4.2.9</unirest-object-mappers-gson.version>
     </properties>
 
     <dependencies>
@@ -134,6 +135,23 @@
             <artifactId>openshift-maven-plugin</artifactId>
             <version>${openshift-maven-plugin.version}</version>
         </dependency>
+
+        <!-- Unirest for Integration Testing -->
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java-core</artifactId>
+            <version>4.10.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Unirest Gson Object Mapper for JSON -->
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-object-mappers-gson</artifactId>
+            <version>${unirest-object-mappers-gson.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
