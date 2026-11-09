@@ -23,6 +23,7 @@
         <postresql-version>42.7.7</postresql-version>
         <openshift-maven-plugin.version>1.18.1</openshift-maven-plugin.version>
         <unirest-object-mappers-gson.version>4.2.9</unirest-object-mappers-gson.version>
+        <javalin-openapi.version>7.2.4</javalin-openapi.version>
     </properties>
 
     <dependencies>
@@ -152,6 +153,23 @@
         </dependency>
 
 
+        <!-- Javalin OpenAPI plugin (annotation driven spec) with Swagger UI and ReDoc -->
+        <dependency>
+            <groupId>io.javalin.community.openapi</groupId>
+            <artifactId>javalin-openapi-plugin</artifactId>
+            <version>${javalin-openapi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.javalin.community.openapi</groupId>
+            <artifactId>javalin-swagger-plugin</artifactId>
+            <version>${javalin-openapi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.javalin.community.openapi</groupId>
+            <artifactId>javalin-redoc-plugin</artifactId>
+            <version>${javalin-openapi.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -164,6 +182,25 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
                 <executions>
+                    <!-- kapt runs the OpenAPI annotation processor before compile -->
+                    <execution>
+                        <id>kapt</id>
+                        <goals>
+                            <goal>kapt</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/main/kotlin</sourceDir>
+                            </sourceDirs>
+                            <annotationProcessorPaths>
+                                <annotationProcessorPath>
+                                    <groupId>io.javalin.community.openapi</groupId>
+                                    <artifactId>openapi-annotation-processor</artifactId>
+                                    <version>${javalin-openapi.version}</version>
+                                </annotationProcessorPath>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>compile</id>
                         <phase>compile</phase>

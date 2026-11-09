@@ -6,6 +6,9 @@ import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.config.JavalinConfig
 import io.javalin.json.JavalinJackson
+import io.javalin.openapi.plugin.OpenApiPlugin
+import io.javalin.openapi.plugin.redoc.ReDocPlugin
+import io.javalin.openapi.plugin.swagger.SwaggerPlugin
 
 class ServerConfig {
     private fun getRemoteAssignedPort(): Int {
@@ -18,6 +21,16 @@ class ServerConfig {
     fun startJavalinService(): Javalin {
 
         val app = Javalin.create { config ->
+            config.registerPlugin(OpenApiPlugin { openapi ->
+                openapi.withDefinitionConfiguration { _, builder ->
+                    builder.info { info ->
+                        info.title("Health Tracker API")
+                        info.description("CRUD operations on the Health Tracker data.")
+                    }
+                }
+            })
+            config.registerPlugin(SwaggerPlugin())
+            config.registerPlugin(ReDocPlugin())
             config.jsonMapper(
                 JavalinJackson(jsonObjectMapper())
             )
