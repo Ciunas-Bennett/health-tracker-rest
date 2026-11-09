@@ -12,39 +12,68 @@ object UserController {
     private val userDao = UserDAO()
 
     fun getAllUsers(ctx: Context) {
-        ctx.json(userDao.getAll())
+        val users = userDao.getAll()
+        if (users.size != 0) {
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
+        }
+        ctx.json(users)
     }
+
 
     fun getUserByUserId(ctx: Context) {
         val user = userDao.findById(ctx.pathParam("user-id").toInt())
         if (user != null) {
             ctx.json(user)
+            ctx.status(200)
+        }
+        else {
+            ctx.status(404)
         }
     }
 
     fun getUserByEmail(ctx: Context) {
-        val user = userDao.findByEmail(ctx.pathParam("email"))
+        val email = ctx.pathParam("email")
+        val user = userDao.findByEmail(email)
         if (user != null) {
             ctx.json(user)
+            ctx.status(200)
+        }
+        else{
+            ctx.status(404)
         }
     }
 
+
     fun addUser(ctx: Context) {
-        val user = jsonToObject<User>(ctx.body())
-        userDao.save(user)
-        ctx.json(user)
+        val mapper = jacksonObjectMapper()
+        val user = mapper.readValue<User>(ctx.body())
+        val userId = userDao.save(user)
+        if (userId != null) {
+            user.id = userId
+            ctx.json(user)
+            ctx.status(201)
+        }
     }
 
     fun deleteUser(ctx: Context) {
-        if (userDao.delete(ctx.pathParam("user-id").toInt()) != 0)
+        val userId = ctx.pathParam("user-id").toInt()
+        if (userDao.delete(userId) != 0)
             ctx.status(204)
         else
             ctx.status(404)
     }
 
     fun updateUser(ctx: Context) {
-        val user = jsonToObject<User>(ctx.body())
-        userDao.update(ctx.pathParam("user-id").toInt(), user)
-        ctx.status(200)
+        val userId = ctx.pathParam("user-id").toInt()
+        val mapper = jacksonObjectMapper()
+        val userUpdates = mapper.readValue<User>(ctx.body())
+        if (userDao.update(userId, userUpdates) != 0)
+            ctx.status(204)
+        else
+            ctx.status(404)
     }
+
 }
