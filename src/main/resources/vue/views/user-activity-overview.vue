@@ -1,13 +1,13 @@
 <template id="user-activity-overview">
-   <div>
-      <h3>Activities list </h3>
-      <ul>
-        <li v-for="activity in activities">
-          {{activity.id}}: {{activity.description}} for {{activity.duration}} minutes
-        </li>
-      </ul>
-    </div>
- </template>
+  <app-layout>
+    <h3>Activities list </h3>
+    <ul>
+      <li v-for="activity in activities">
+        {{activity.id}}: {{activity.description}} for {{activity.duration}} minutes
+      </li>
+    </ul>
+  </app-layout>
+</template>
 
 <script>
 app.component("user-activity-overview",{

@@ -1,5 +1,5 @@
 <template id="user-profile">
-  <div>
+  <app-layout>
     <form v-if="user">
       <label class="col-form-label">User ID: </label>
       <input class="form-control" v-model="user.id" name="id" type="number" readonly/><br>
@@ -12,7 +12,7 @@
       <br>
       <a :href="`/users/${user.id}/activities`">View User Activities</a>
     </dt>
-  </div>
+  </app-layout>
 </template>
 
 <script>

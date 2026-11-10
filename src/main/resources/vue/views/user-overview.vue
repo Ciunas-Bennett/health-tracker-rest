@@ -1,5 +1,5 @@
 <template id="user-overview">
-  <div>
+  <app-layout>
     <div>
       <ul class="user-overview-list">
         <li v-for="user in users">
@@ -7,7 +7,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </app-layout>
 </template>
 
 <script>
