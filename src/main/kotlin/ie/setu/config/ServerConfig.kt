@@ -72,6 +72,7 @@ class ServerConfig {
         config.routes.patch("/api/activities/{activity-id}", ActivityController::updateActivity)
         config.routes.get("/", VueComponent("<home-page></home-page>"))
         config.routes.get("/users", VueComponent("<user-overview></user-overview>"))
+        config.routes.get("/activities", VueComponent("<activity-overview></activity-overview>"))
         config.routes.get("/users/{user-id}", VueComponent("<user-profile></user-profile>"))
         config.routes.get("/users/{user-id}/activities", VueComponent("<user-activity-overview></user-activity-overview>"))
 
