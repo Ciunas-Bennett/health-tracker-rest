@@ -50,7 +50,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.3.232</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -169,7 +168,17 @@
             <artifactId>javalin-redoc-plugin</artifactId>
             <version>${javalin-openapi.version}</version>
         </dependency>
-
+        <!-- adding Vue -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>vue</artifactId>
+            <version>3.5.43</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>axios</artifactId>
+            <version>1.20.0</version>
+        </dependency>
     </dependencies>
 
     <build>

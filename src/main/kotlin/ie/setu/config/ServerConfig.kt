@@ -9,6 +9,8 @@ import io.javalin.json.JavalinJackson
 import io.javalin.openapi.plugin.OpenApiPlugin
 import io.javalin.openapi.plugin.redoc.ReDocPlugin
 import io.javalin.openapi.plugin.swagger.SwaggerPlugin
+import io.javalin.plugin.bundled.JavalinVuePlugin
+import io.javalin.vue.VueComponent
 
 class ServerConfig {
     private fun getRemoteAssignedPort(): Int {
@@ -42,6 +44,14 @@ class ServerConfig {
                 ctx.json("404 - Not Found")
             }
             registerRoutes(config)
+
+            config.registerPlugin(
+                JavalinVuePlugin { vue ->
+                    vue.vueInstanceNameInJs = "app"
+                }
+            )
+            config.staticFiles.add("/META-INF/resources")
+
         }.start(getRemoteAssignedPort())
         return app
     }
@@ -60,5 +70,6 @@ class ServerConfig {
         config.routes.get("/api/activities/{activity-id}", ActivityController::getActivitiesByActivityId)
         config.routes.delete("/api/activities/{activity-id}", ActivityController::deleteActivityByActivityId)
         config.routes.patch("/api/activities/{activity-id}", ActivityController::updateActivity)
+        config.routes.get("/", VueComponent("<home-page></home-page>"))
     }
 }
