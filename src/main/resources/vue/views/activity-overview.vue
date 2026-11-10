@@ -3,7 +3,9 @@
     <h3>Activities list </h3>
     <ul class="activity-overview-list">
       <li v-for="activity in activities">
-        {{activity.id}}: {{activity.description}} for {{activity.duration}} minutes
+        <a :href="`/activities/${activity.id}`">
+          {{activity.id}}: {{activity.description}} for {{activity.duration}} minutes
+        </a>
         (user {{activity.userId}})
       </li>
     </ul>
