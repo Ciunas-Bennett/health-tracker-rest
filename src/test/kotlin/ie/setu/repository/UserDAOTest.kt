@@ -35,7 +35,7 @@ class UserDAOTest {
         @BeforeAll
         @JvmStatic
         internal fun setupInMemoryDatabaseConnection() {
-            Database.connect("jdbc:h2:mem:test", driver = "org.h2.Driver", user = "root", password = "")
+            Database.connect("jdbc:h2:mem:daotest", driver = "org.h2.Driver", user = "root", password = "")
         }
     }
     @Nested

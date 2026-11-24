@@ -24,7 +24,18 @@
         <openshift-maven-plugin.version>1.18.1</openshift-maven-plugin.version>
         <unirest-object-mappers-gson.version>4.2.9</unirest-object-mappers-gson.version>
         <javalin-openapi.version>7.2.4</javalin-openapi.version>
+        <dokka.version>2.3.0</dokka.version>
+
     </properties>
+
+    <!-- Location of the Maven Plugin for Dokka -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <!-- json dependency for serialising joda date time -->
@@ -186,6 +197,22 @@
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
 
         <plugins>
+
+            <!-- Maven Plugin for Dokka - basic configuration -->
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka.version}</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
