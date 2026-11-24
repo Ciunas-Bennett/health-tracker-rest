@@ -33,7 +33,26 @@ jobs:
       with:
         name: target-artifact
         path: target/
-  
+
+  documentation:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it 
+      - uses: actions/checkout@v4
+
+      # Runs the Maven dokka task
+      - name: Dokka with Maven
+        run: mvn -B dokka:dokka
+
+      # Builds a zip file with the KDoc generated website in it
+      - name: Archive KDoc Documentation
+        uses: actions/upload-artifact@v4.4.2
+        with:
+          name: KDoc Documentation Site
+          path: target/dokka
+
   test:
     name: Automated Testing
     needs: build
