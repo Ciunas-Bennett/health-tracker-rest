@@ -163,6 +163,21 @@
         </dependency>
 
 
+        <!-- Selenium for browser (UI) tests -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.54.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- MockK for mocking in unit tests -->
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk-jvm</artifactId>
+            <version>1.14.12</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Javalin OpenAPI plugin (annotation driven spec) with Swagger UI and ReDoc -->
         <dependency>
             <groupId>io.javalin.community.openapi</groupId>

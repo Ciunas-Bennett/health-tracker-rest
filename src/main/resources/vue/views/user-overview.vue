@@ -7,7 +7,7 @@
             Users
           </div>
            <div class="col text-end">
-            <button rel="tooltip" title="Add"
+            <button id="add-button" rel="tooltip" title="Add"
                     class="btn btn-info btn-simple btn-link"
                     @click="hideForm =!hideForm">
               <i class="fa fa-plus" aria-hidden="true"></i>
@@ -30,7 +30,7 @@
             <input type="email" class="form-control" v-model="formData.email" name="email" placeholder="Email"/>
           </div>
         </form>
-        <button rel="tooltip" title="Update" class="btn btn-info btn-simple btn-link" @click="addUser()">Add User</button>
+        <button id="add-user-button" rel="tooltip" title="Update" class="btn btn-info btn-simple btn-link" @click="addUser()">Add User</button>
       </div>
     </div>
     <div class="list-group list-group-flush">

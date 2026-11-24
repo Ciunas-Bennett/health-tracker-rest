@@ -18,11 +18,10 @@ import io.javalin.openapi.OpenApiResponse
  * Each function reads its input from the Javalin [Context] and sets the
  * HTTP status code and (where applicable) the JSON body of the response.
  */
-object ActivityController {
-
-    private val activityDAO = ActivityDAO()
-    private val userDAO = UserDAO()
-
+class ActivityController(
+    private val activityDAO: ActivityDAO = ActivityDAO(),
+    private val userDAO: UserDAO = UserDAO()
+) {
     /**
      * Returns all activities, regardless of user.
      *

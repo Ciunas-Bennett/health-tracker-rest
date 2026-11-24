@@ -1,6 +1,5 @@
 package ie.setu.controllers
 
-import ie.setu.controllers.UserController.updateUser
 import ie.setu.domain.Activity
 import ie.setu.domain.User
 import ie.setu.domain.db.Activities
