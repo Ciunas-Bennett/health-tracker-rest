@@ -2,6 +2,8 @@ package ie.setu.helpers
 
 import ie.setu.domain.Activity
 import ie.setu.domain.User
+import ie.setu.domain.repository.ActivityDAO
+import ie.setu.domain.repository.UserDAO
 import org.joda.time.DateTime
 
 val nonExistingEmail = "112233445566778testUser@xxxxx.xx"
@@ -20,3 +22,15 @@ val activities = arrayListOf<Activity>(
     Activity(id = 2, description = "Hiking",  duration = 60.0, calories = 450, started = DateTime.now(), userId = 1),
     Activity(id = 3, description = "Cycling", duration = 45.0, calories = 350, started = DateTime.now(), userId = 2)
 )
+
+/** Inserts the fixture users into the database (the Users table must already exist). */
+fun populateUserTable() {
+    val userDAO = UserDAO()
+    users.forEach { userDAO.save(it) }
+}
+
+/** Inserts the fixture activities into the database (the Activities table must already exist). */
+fun populateActivityTable() {
+    val activityDAO = ActivityDAO()
+    activities.forEach { activityDAO.save(it) }
+}

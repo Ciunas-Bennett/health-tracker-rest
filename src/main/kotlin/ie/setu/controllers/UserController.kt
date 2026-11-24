@@ -13,9 +13,7 @@ import io.javalin.openapi.OpenApiParam
 import io.javalin.openapi.OpenApiRequestBody
 import io.javalin.openapi.OpenApiResponse
 
-object UserController {
-
-    private val userDao = UserDAO()
+class UserController(private val userDao: UserDAO = UserDAO()) {
 
     @OpenApi(
         path = "/api/users",

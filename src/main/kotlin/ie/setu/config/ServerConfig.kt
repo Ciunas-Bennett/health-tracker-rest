@@ -20,7 +20,7 @@ class ServerConfig {
         } else 8080
     }
 
-    fun startJavalinService(): Javalin {
+    fun startJavalinService(port: Int = getRemoteAssignedPort()): Javalin {
 
         val app = Javalin.create { config ->
             config.registerPlugin(OpenApiPlugin { openapi ->
@@ -52,24 +52,26 @@ class ServerConfig {
             )
             config.staticFiles.add("/META-INF/resources")
 
-        }.start(getRemoteAssignedPort())
+        }.start(port)
         return app
     }
 
     private fun registerRoutes(config: JavalinConfig) {
-        config.routes.get("/api/users", UserController::getAllUsers)
-        config.routes.get("/api/users/{user-id}", UserController::getUserByUserId)
-        config.routes.get("/api/users/email/{email}", UserController::getUserByEmail)
-        config.routes.post("/api/users", UserController::addUser)
-        config.routes.delete("/api/users/{user-id}", UserController::deleteUser)
-        config.routes.patch("/api/users/{user-id}", UserController::updateUser)
-        config.routes.get("/api/users/{user-id}/activities", ActivityController::getActivitiesByUserId)
-        config.routes.delete("/api/users/{user-id}/activities", ActivityController::deleteActivitiesByUserId)
-        config.routes.get("/api/activities", ActivityController::getAllActivities)
-        config.routes.post("/api/activities", ActivityController::addActivity)
-        config.routes.get("/api/activities/{activity-id}", ActivityController::getActivitiesByActivityId)
-        config.routes.delete("/api/activities/{activity-id}", ActivityController::deleteActivityByActivityId)
-        config.routes.patch("/api/activities/{activity-id}", ActivityController::updateActivity)
+        val userController = UserController()
+        val activityController = ActivityController()
+        config.routes.get("/api/users", userController::getAllUsers)
+        config.routes.get("/api/users/{user-id}", userController::getUserByUserId)
+        config.routes.get("/api/users/email/{email}", userController::getUserByEmail)
+        config.routes.post("/api/users", userController::addUser)
+        config.routes.delete("/api/users/{user-id}", userController::deleteUser)
+        config.routes.patch("/api/users/{user-id}", userController::updateUser)
+        config.routes.get("/api/users/{user-id}/activities", activityController::getActivitiesByUserId)
+        config.routes.delete("/api/users/{user-id}/activities", activityController::deleteActivitiesByUserId)
+        config.routes.get("/api/activities", activityController::getAllActivities)
+        config.routes.post("/api/activities", activityController::addActivity)
+        config.routes.get("/api/activities/{activity-id}", activityController::getActivitiesByActivityId)
+        config.routes.delete("/api/activities/{activity-id}", activityController::deleteActivityByActivityId)
+        config.routes.patch("/api/activities/{activity-id}", activityController::updateActivity)
         config.routes.get("/", VueComponent("<home-page></home-page>"))
         config.routes.get("/users", VueComponent("<user-overview></user-overview>"))
         config.routes.get("/activities", VueComponent("<activity-overview></activity-overview>"))
