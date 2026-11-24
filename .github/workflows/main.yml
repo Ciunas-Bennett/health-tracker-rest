@@ -52,7 +52,7 @@ jobs:
 
   deploy:
     name: Deploy to OpenShift
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
